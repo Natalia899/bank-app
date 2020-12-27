@@ -1,20 +1,12 @@
 import React, { Component } from 'react';
-import Transaction from './Transactions';
+import Transaction from './Transaction';
 
 class Transactions extends Component {
-  constructor() {
-    super()
-    this.state= {
-
+    render() {
+        return (
+            <div className='transactions'>Transactions: {this.props.allTransactions.map(m => <Transaction transaction={m} deleteTransaction={this.props.deleteTransaction} />)} </div>
+        )
     }
-  }
-
-   render(){
-
-    return(
-      
-    )
-   }
 }
 
 export default Transactions;
