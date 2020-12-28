@@ -5,7 +5,7 @@ import Operations from './components/Operations';
 import Transactions from './components/Transactions';
 import Categories from './components/Categories';
 import axios from 'axios'
-
+import 'materialize-css';
 import TransactionsChart from './components/TransactionsChart'
 
 

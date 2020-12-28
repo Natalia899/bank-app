@@ -17,8 +17,10 @@ class Transact extends Component {
       <div className='transaction'>
           <div className='t'>   Amount:   <span className='transactionValue'>{this.props.transaction.amount}</span>  </div>
           <div className='t'>   Vendor:   <span className='transactionValue'>{this.props.transaction.vendor}</span> </div>
-          <div className='t'>  Category:  <span className='transactionValue'>{this.props.transaction.category}</span> </div>
-          <div className='t' onClick={this.deleteTransaction}>-</div>
+          <div className='t'>  Category:  <span className='transactionValue'>{this.props.transaction.category}</span>
+          <i id='remove' onClick={this.deleteTransaction} class="material-icons">delete</i> </div>
+          {/* <i id='remove' onClick={this.deleteTransaction} class="material-icons">delete</i> */}
+          {/* <div className='t' onClick={this.deleteTransaction}>-</div> */}
       </div>
     )
    }
