@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Transaction extends Component {
+class Transact extends Component {
   constructor() {
     super()
     this.state= {
@@ -8,7 +8,8 @@ class Transaction extends Component {
     }
   }
   deleteTransaction = () => {
-    this.props.deleteTransaction(this.props.vender)
+    let id = this.props.transaction._id
+    this.props.deleteTransaction(id)
   }
 
    render(){
@@ -23,4 +24,4 @@ class Transaction extends Component {
    }
 }
 
-export default Transaction;
+export default Transact;

@@ -1,57 +1,88 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import './App.css';
 import Operations from './components/Operations';
 import Transactions from './components/Transactions';
+import Categories from './components/Categories';
+import axios from 'axios'
 
 class App extends Component {
   constructor() {
     super()
-    this.state= {
-      transactions: [
-        { amount: 3200, vendor: "Elevation", category: "Salary" },
-        { amount: -7, vendor: "Runescape", category: "Entertainment" },
-        { amount: -20, vendor: "Subway", category: "Food" },
-        { amount: -98, vendor: "La Baguetterie", category: "Food" }
-      ]
-    
+    this.state = {
+      transactions: [],
+      categories: []
     }
+
+  }
+  async getTransactions() {
+    return axios.get("http://localhost:4200/transactions")
+  }
+  
+  async postTransaction(newTransaction) {
+    return await axios.post("http://localhost:4200/transaction", newTransaction)
+  }
+  
+  async removeTransaction(id) {
+    return await axios.delete(`http://localhost:4200/transaction/${id}`)
   }
 
-  getTotal (){
+  async getCategoriesFromDB () {
+  return await axios.get("http://localhost:4200/categories")
+  }
+  
+ getCategories = async () => {
+    let categories = await this.getCategoriesFromDB()
+     this.setState({ categories}, () => {
+      console.log(this.state.categories);
+    })
+
+  }
+
+  async componentDidMount() {
+    const response = await this.getTransactions()
+    let categories = await this.getCategoriesFromDB()
+    this.setState({ transactions: response.data, categories: categories.data })
+     
+
+  }
+
+  getTotal() {
     let sum = 0
-    for(let i in this.state.transactions) {
-   sum =+ this.state.transactions[i].amount
+    for (let i in this.state.transactions) {
+      sum = + this.state.transactions[i].amount
     }
     return sum
   }
 
-  deleteTransaction = (vendor) => {
-   let tempTransactions = [... this.state.transactions]
-   let index= tempTransactions.indexOf(vendor)
-   tempTransactions.splice(index, 1)
-   this.setState({transactions: tempTransactions}, ()=>{
-     console.log(this.state.transactions);
-   })
+
+  deleteTransaction = async (id) => {
+    const response = await this.removeTransaction(id)
+    this.setState({ transactions: response.data })
   }
 
-  addNewTransaction = (newTransaction) => {
-    let tempTransactions = [... this.state.transactions]
-    tempTransactions.push(newTransaction)
-    this.setState({transactions: tempTransactions}, ()=>{
-      console.log(this.state.transactions);
-    })
+  addNewTransaction = async (newTransaction) => {
+    const response = await this.postTransaction(newTransaction)
+    this.setState({ transactions: response.data })
   }
 
-   render(){
-
-    return(
-     <div className='mainContainer'>
-       <div className='total'>Total balance: {this.getTotal()}</div>
-       <Transactions allTransactions={this.state.transactions} deleteTransaction={this.deleteTransaction} />
-       <Operations allTransactions={this.state.transactions} addNewTransaction={this.addNewTransaction} />
+  render() {
+    return (
+    <Router>
+      <div className='mainContainer'>
+        <div className='navBar'>
+        <Link to="/">Home</Link>
+        <Link to="/transactions">My transactions</Link>
+        <Link to="/operations">+</Link>
+        </div>
+        <div className='total'>Total balance: {this.getTotal()}</div>
+        <Route path="/" exact render={() => <Categories categories={this.state.categories}/>} />
+        <Route path="/transactions" exact render={() =>  <Transactions allTransactions={this.state.transactions} deleteTransaction={this.deleteTransaction} />} />
+        <Route path="/operations" exact render={() => <Operations allTransactions={this.state.transactions} addNewTransaction={this.addNewTransaction} /> } />
      </div>
+   </Router>
     )
-   }
+  }
 }
 
 export default App;
