@@ -1,38 +1,92 @@
-.App {
-  text-align: center;
+body {
+  background-color: rgb(250, 249, 249);
+  font-family: 'Montserrat', sans-serif;
+  color: rgb(33, 45, 64);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+@media(max-width: 768px) {
+  .navBar{
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    padding: 5%;
+    grid-gap: 5px;
+    background-color: rgb(151, 157, 172);
+    height: 100%;
+    font-weight: bold;
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  .navBar a {
+    display: grid;
+    justify-content: center;
+    color:  rgb(250, 249, 249);
   }
-  to {
-    transform: rotate(360deg);
+
+  .categories {
+    display: grid;
+    justify-content: center;
+    margin: 20%
   }
+  
+  .transactions {
+    display: grid;
+    justify-content: center;
+    margin: 20%
+  }
+
+  .category {
+    border: rgb(33, 45, 64) solid 2px;
+    border-radius: 5px;
+    box-shadow: rgb(56, 93, 148) 0px 2px 8px 0px;
+    padding-left: 20px;
+    padding-right: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .transaction {
+    border: rgb(33, 45, 64) solid 2px;
+    border-radius: 5px;
+    box-shadow: rgb(56, 93, 148) 0px 2px 8px 0px;
+    padding-left: 20px;
+    padding-right: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .total{
+    padding: 5%;
+    color: rgb(33, 45, 64);
+    font-weight: bold;
+  }
+
+  .transactionValue {
+    margin-left: 10px;
+    font-weight: bold;
+  }
+
+  .operations {
+      display: grid;
+      justify-content: center;
+      margin: 20%
+  }
+
+  .operationValue {
+    border: rgb(33, 45, 64) solid 2px;
+    border-radius: 5px;
+    box-shadow: rgb(56, 93, 148) 0px 2px 8px 0px;
+    padding-left: 20px;
+    padding-right: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .categoryValue {
+    padding-left: 20px;
+  }
+  
+  .t {
+    margin-top: 5px;
+  }
+
+
 }

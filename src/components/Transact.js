@@ -15,10 +15,10 @@ class Transact extends Component {
    render(){
     return(
       <div className='transaction'>
-          <span className='amount'>   Amount:  {this.props.transaction.amount} </span>
-          <span className='vendor'>   Vendor:  {this.props.transaction.vendor}</span>
-          <span className='category'>  Category:  {this.props.transaction.category}</span>
-          <span className='delete' onClick={this.deleteTransaction}>-</span>
+          <div className='t'>   Amount:   <span className='transactionValue'>{this.props.transaction.amount}</span>  </div>
+          <div className='t'>   Vendor:   <span className='transactionValue'>{this.props.transaction.vendor}</span> </div>
+          <div className='t'>  Category:  <span className='transactionValue'>{this.props.transaction.category}</span> </div>
+          <div className='t' onClick={this.deleteTransaction}>-</div>
       </div>
     )
    }

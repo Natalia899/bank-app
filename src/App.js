@@ -6,6 +6,9 @@ import Transactions from './components/Transactions';
 import Categories from './components/Categories';
 import axios from 'axios'
 
+import TransactionsChart from './components/TransactionsChart'
+
+
 class App extends Component {
   constructor() {
     super()
@@ -43,8 +46,6 @@ class App extends Component {
     const response = await this.getTransactions()
     let categories = await this.getCategoriesFromDB()
     this.setState({ transactions: response.data, categories: categories.data })
-     
-
   }
 
   getTotal() {
@@ -70,15 +71,19 @@ class App extends Component {
     return (
     <Router>
       <div className='mainContainer'>
+
+      
+
         <div className='navBar'>
         <Link to="/">Home</Link>
         <Link to="/transactions">My transactions</Link>
-        <Link to="/operations">+</Link>
+        <Link to="/operations">New transaction</Link>
         </div>
-        <div className='total'>Total balance: {this.getTotal()}</div>
+        {/* <Route path="/" exact render={() => <TransactionsChart categories={this.state.categories}/>} /> */}
         <Route path="/" exact render={() => <Categories categories={this.state.categories}/>} />
         <Route path="/transactions" exact render={() =>  <Transactions allTransactions={this.state.transactions} deleteTransaction={this.deleteTransaction} />} />
         <Route path="/operations" exact render={() => <Operations allTransactions={this.state.transactions} addNewTransaction={this.addNewTransaction} /> } />
+        <div className='total'>Total balance: {this.getTotal()}</div>
      </div>
    </Router>
     )

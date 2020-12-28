@@ -6,8 +6,8 @@ const Category = (props) => {
     console.log('cat');
     return(
         <div className='category'>
-            <span className='categoryName'>{props.category._id}</span>
-            <span className='totalByCategory'>{props.category.total}</span>
+            <span className='categoryValue'>{props.category._id}</span>
+            <span className='categoryValue'>{props.category.total}</span>
         </div>
     )
 }
