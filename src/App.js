@@ -21,22 +21,22 @@ class App extends Component {
   async getTransactions() {
     return axios.get("http://localhost:4200/transactions")
   }
-  
+
   async postTransaction(newTransaction) {
     return await axios.post("http://localhost:4200/transaction", newTransaction)
   }
-  
+
   async removeTransaction(id) {
     return await axios.delete(`http://localhost:4200/transaction/${id}`)
   }
 
-  async getCategoriesFromDB () {
-  return await axios.get("http://localhost:4200/categories")
+  async getCategoriesFromDB() {
+    return await axios.get("http://localhost:4200/categories")
   }
-  
- getCategories = async () => {
+
+  getCategories = async () => {
     let categories = await this.getCategoriesFromDB()
-     this.setState({ categories}, () => {
+    this.setState({ categories }, () => {
       console.log(this.state.categories);
     })
 
@@ -45,17 +45,17 @@ class App extends Component {
   async componentDidMount() {
     const response = await this.getTransactions()
     let categories = await this.getCategoriesFromDB()
+
     this.setState({ transactions: response.data, categories: categories.data })
   }
 
   getTotal() {
     let sum = 0
     for (let i in this.state.transactions) {
-      sum = + this.state.transactions[i].amount
+      sum += this.state.transactions[i].amount
     }
     return sum
   }
-
 
   deleteTransaction = async (id) => {
     const response = await this.removeTransaction(id)
@@ -69,23 +69,28 @@ class App extends Component {
 
   render() {
     return (
-    <Router>
-      <div className='mainContainer'>
+      <Router>
+        <div className='mainContainer'>
+          <div className='navBar'>
+            <Link to="/">Home</Link>
+            <Link to="/transactions">My transactions</Link>
+            <Link to="/operations">New transaction</Link>
+          </div>
+          {/* <Route path="/" exact render={() => <TransactionsChart categories={this.state.categories}/>} /> */}
+          <Route path="/" exact render={() => <Categories categories={this.state.categories} />} />
+          <Route path="/transactions" exact render={() => <Transactions allTransactions={this.state.transactions} deleteTransaction={this.deleteTransaction} />} />
+          <Route path="/operations" exact render={() => <Operations allTransactions={this.state.transactions} addNewTransaction={this.addNewTransaction} />} />
+          <div className='total'> {this.getTotal() >= 500 ?
+            <div className="balance" style={{ color: "green" }}>
+              Balance: {this.getTotal()}
+            </div> :
+            <div className="balance" style={{ color: "red" }}>
+              Balance: {this.getTotal()}
+            </div>
+          }</div>
 
-      
-
-        <div className='navBar'>
-        <Link to="/">Home</Link>
-        <Link to="/transactions">My transactions</Link>
-        <Link to="/operations">New transaction</Link>
         </div>
-        {/* <Route path="/" exact render={() => <TransactionsChart categories={this.state.categories}/>} /> */}
-        <Route path="/" exact render={() => <Categories categories={this.state.categories}/>} />
-        <Route path="/transactions" exact render={() =>  <Transactions allTransactions={this.state.transactions} deleteTransaction={this.deleteTransaction} />} />
-        <Route path="/operations" exact render={() => <Operations allTransactions={this.state.transactions} addNewTransaction={this.addNewTransaction} /> } />
-        <div className='total'>Total balance: {this.getTotal()}</div>
-     </div>
-   </Router>
+      </Router>
     )
   }
 }

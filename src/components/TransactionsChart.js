@@ -40,11 +40,7 @@ const pieOptions = {
   };
 
 const TransactionsChart = (props) => {
-    console.log(props);
-    console.log('cat');
     return(<Router>
-
-
         <div className="App">
         <Chart
           chartType="PieChart"

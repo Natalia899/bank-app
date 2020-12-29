@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 
 class Transact extends Component {
-  constructor() {
-    super()
-    this.state= {
 
-    }
-  }
   deleteTransaction = () => {
     let id = this.props.transaction._id
     this.props.deleteTransaction(id)
@@ -19,8 +14,6 @@ class Transact extends Component {
           <div className='t'>   Vendor:   <span className='transactionValue'>{this.props.transaction.vendor}</span> </div>
           <div className='t'>  Category:  <span className='transactionValue'>{this.props.transaction.category}</span>
           <i id='remove' onClick={this.deleteTransaction} class="material-icons">delete</i> </div>
-          {/* <i id='remove' onClick={this.deleteTransaction} class="material-icons">delete</i> */}
-          {/* <div className='t' onClick={this.deleteTransaction}>-</div> */}
       </div>
     )
    }
