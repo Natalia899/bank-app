@@ -68,7 +68,8 @@ body {
   .operations {
       display: grid;
       justify-content: center;
-      margin: 20%
+      margin: 20%;
+      gap: 10px
   }
 
   .operationValue {
@@ -94,7 +95,7 @@ body {
   }
  .operations a {
    display: inline;
-   margin: 5px
+   margin-top: 5px
  }
  
 

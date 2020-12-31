@@ -22,7 +22,6 @@ router.delete('/transaction/:id', async (req, res) => {
 })
 
 router.get('/categories', (req, res) => {
-    console.log('server-------------------------------------');
     Transaction.aggregate([{
         $group:
         {
