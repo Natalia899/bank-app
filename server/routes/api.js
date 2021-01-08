@@ -26,11 +26,22 @@ router.get('/categories', (req, res) => {
         $group:
         {
             _id: "$category",
-            info: { $push: { amount: '$amount'} },
+            expenses: { $sum: { $cond: [{ '$lt': ['$amount', 0] }, "$amount", 0] } },
+            income: { $sum: { $cond: [{ '$gt': ['$amount', 0] }, "$amount", 0] } },
             'total': { $sum: "$amount" }
         }
     }]).exec((error, categories) => res.send(categories))
 })
+
+// Transaction.aggregate([
+//     {
+//         $group: {
+//             _id: null,
+//             expenses: { $sum: { $cond: [{ '$lt': ['$amount', 0] }, "$amount", 0] } },
+//             income: { $sum: { $cond: [{ '$gt': ['$amount', 0] }, "$amount", 0] } },
+//             balance: { "$sum": "$amount" }
+//         }
+//     }]).exec((e, categories) => { res.send(categories) })
 
 
 

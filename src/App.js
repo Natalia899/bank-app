@@ -76,7 +76,7 @@ class App extends Component {
             <Link to="/transactions">My transactions</Link>
             <Link to="/operations">New transaction</Link>
           </div>
-          {/* <Route path="/" exact render={() => <TransactionsChart categories={this.state.categories}/>} /> */}
+          <Route path="/" exact render={() => <TransactionsChart categories={this.state.categories}/>} />
           <Route path="/" exact render={() => <Categories categories={this.state.categories} />} />
           <Route path="/transactions" exact render={() => <Transactions allTransactions={this.state.transactions} deleteTransaction={this.deleteTransaction} />} />
           <Route path="/operations" exact render={() => <Operations allTransactions={this.state.transactions} addNewTransaction={this.addNewTransaction} />} />

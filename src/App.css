@@ -24,10 +24,13 @@ body {
   .categories {
     display: grid;
     justify-content: center;
-    margin: 20%
+    margin-left: 20%;
+    margin-top: 5%;
+    margin-bottom: 5%;
   }
   
   .transactions {
+    width: 60%;
     display: grid;
     justify-content: center;
     margin: 20%;
@@ -96,6 +99,11 @@ body {
  .operations a {
    display: inline;
    margin-top: 5px
+ }
+ .chart {
+   margin-left: 20%;
+   margin-top: 2%;
+  
  }
  
 

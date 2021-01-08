@@ -1,60 +1,31 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import Chart from "react-google-charts"
 
-const pieOptions = {
-    title: "",
-    pieHole: 0.6,
-    slices: [
-      {
-        color: "#2BB673"
-      },
-      {
-        color: "#d91e48"
-      },
-      {
-        color: "#007fad"
-      },
-      {
-        color: "#e9a227"
-      }
-    ],
-    legend: {
-      position: "bottom",
-      alignment: "center",
-      textStyle: {
-        color: "233238",
-        fontSize: 14
-      }
-    },
-    tooltip: {
-      showColorCode: true
-    },
-    chartArea: {
-      left: 0,
-      top: 0,
-      width: "100%",
-      height: "80%"
-    },
-    fontName: "Roboto"
-  };
 
 const TransactionsChart = (props) => {
-    return(<Router>
-        <div className="App">
-        <Chart
-          chartType="PieChart"
-          data={[["Age", "Weight"], ["a", 12], ["b", 5.5],  ["c", 60]]}
-          options={pieOptions}
-          graph_id="PieChart"
-          width={"100%"}
-          height={"400px"}
-          legend_toggle
-        />
-      </div>
-    </Router>
+  const expenses = props.categories.filter(transaction => transaction.expenses < 0)
+  const chartData = [['Expense', 'total']]
+  for (let i = 0; i < expenses.length; i++) {
+    chartData.push([expenses[i]._id, Math.abs(expenses[i].total)])
+  }
+  return (
+    <div className="chart">
+      <Chart
+        width={'500px'}
+        height={'300px'}
+        chartType="PieChart"
+        loader={<div>Loading Chart</div>}
+        data={chartData}
+        options={{
+          title: 'My Expenses',
+          is3D: true,
+        }}
+        rootProps={{ 'data-testid': '2' }}
+      />
 
-    )
+    </div>
+  )
 }
-   
+
 export default TransactionsChart;
