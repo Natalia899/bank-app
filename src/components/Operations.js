@@ -45,8 +45,6 @@ class Operations extends Component {
       
         <a  onClick={this.addDepositTransaction} class="waves-effect waves-light btn">Deposit</a>
         <a onClick={this.addWithdrawTransaction} class="waves-effect waves-light btn">Withdraw</a>
-        {/* <button onClick={this.addDepositTransaction}>Deposit</button>
-        <button onClick={this.addWithdrawTransaction}>Withdraw</button> */}
       </div>
     )
   }

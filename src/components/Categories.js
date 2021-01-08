@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Category from './Category';
 
 const Categories = (props) =>{
@@ -7,7 +7,6 @@ const Categories = (props) =>{
                {props.categories.map(c => <Category category={c} />)}
            </div>
         )
-    
 }
 
 export default Categories;
